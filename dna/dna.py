@@ -1,41 +1,31 @@
-import os
+import os, sys
+sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), \
+                             os.pardir))
+from constants import DNA_ALPHABET, is_DNA
+from exceptions import IterableLengthError, StringIsNotDNAError
 
-class _StringIsNotDNA(Exception):
-    def __init__(self, message=None):
-        if message is None:
-            message = 'Error: your string is not a DNA string!'
-        super().__init__(message)
-
-class _StringIsOutOfRange(Exception):
-    def __init__(self, string, message=None):
-        if message is None:
-            message = 'Error: len(' + [name for name in globals() \
-                                   if globals()[name] == string][0] \
-                + ') = ' + str(len(string)) + ' must be at most 1000!'
-        super().__init__(message)
-
-_DNA_ALPHABET = 'ACGT'
-
-def _is_DNA(nt):
-    return True if nt in _DNA_ALPHABET else False
 
 def dna(s, path=None, save=False):
-    # assert all(list(map(_is_DNA, s))), f'Error: your string is not a DNA string'
-    # assert len(s) <= 1e3, f'Error: len(s) = {len(s)} must be at most 1000!'
+    # assert isinstance(s, str), f'Error: type(s) = {type(s).__name__} must be str!'
+    # assert all(list(map(_is_DNA, s))), f'Error: Your string is not a valid DNA string! \
+    #     It must be composed using {DNA_ALPHABET} alphabet!'
+    # assert len(s) <= 1e3, f'Error: len(s) = {len(s)} must be <= 1000!'
 
-    if not all(list(map(_is_DNA, s))):
-        raise _StringIsNotDNA()
+    if not isinstance(s, str):
+        raise TypeError(f'Error: type(s) = {type(s).__name__} must be str!')
+    if not all(list(map(is_DNA, s))):
+        raise StringIsNotDNAError()
     if len(s) > 1e3:
-        raise _StringIsOutOfRange(s)
+        raise IterableLengthError(iterable=s, sign='<=', value=int(1e3))
 
-    result = [s.count(nt) for nt in _DNA_ALPHABET]
+    result = [s.count(nt) for nt in DNA_ALPHABET]
 
     if save:
         if path is None:
             path = os.path.join(os.path.dirname(os.path.realpath(__file__)), \
                                 'rosalind_dna_1_output.txt')
-        else:
-            path = os.path.join(os.getcwd(), 'rosalind_dna_1_output.txt')
+        elif os.path.isdir(path):
+            path = os.path.join(path, 'rosalind_dna_1_output.txt')
         with open(path,  'w') as file:
             file.write(' '.join([str(x) for x in result]))
 
