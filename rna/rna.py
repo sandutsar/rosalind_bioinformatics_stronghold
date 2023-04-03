@@ -32,7 +32,7 @@ def rna(s, path=None, save=False):
 
     if save:
         if path is None:
-            path = os.path.join(os.getcwd(), os.path.basename(__file__).split('.')[0], \
+            path = os.path.join(os.path.dirname(os.path.realpath(__file__)), \
                                 'rosalind_rna_1_output.txt')
         else:
             path = os.path.join(os.getcwd(), 'rosalind_rna_1_output.txt')
@@ -42,9 +42,10 @@ def rna(s, path=None, save=False):
     return result
 
 if __name__ == '__main__':
-    with open(os.path.join(os.getcwd(), os.path.basename(__file__).split('.')[0], \
+    with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), \
                            'rosalind_rna_1_dataset.txt'), 'r') as file:
         t = file.readline()[:-1]
+
     print(t)
 
     u = rna(t, save=True)
