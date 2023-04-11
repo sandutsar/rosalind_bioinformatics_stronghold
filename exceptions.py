@@ -24,14 +24,14 @@ class IterableLengthError(Exception):
 class StringIsNotDNAError(Exception):
     def __init__(self, message=None):
         if message is None:
-            message = f'Error: Your string is not a valid DNA string! \
-                It must be composed using {DNA_ALPHABET} alphabet!'
+            message = 'Error: Your string is not a valid DNA string!\n\
+                It must be composed using ' + DNA_ALPHABET + ' alphabet!'
         super().__init__(message)
 
 
 class StringIsNotRNAError(Exception):
     def __init__(self, message=None):
         if message is None:
-            message = f'Error: Your string is not a valid RNA string! \
-                It must be composed using {RNA_ALPHABET} alphabet!'
+            message = 'Error: Your string is not a valid RNA string!\n\
+                It must be composed using ' + RNA_ALPHABET + ' alphabet!'
         super().__init__(message)
