@@ -13,7 +13,7 @@ def complement_table(s):
         return {key:value for key, value in \
                 zip(DNA_ALPHABET, DNA_ALPHABET[::-1])}
     elif is_RNA(s):
-        {key:value for key, value in \
+        return {key:value for key, value in \
                 zip(RNA_ALPHABET, RNA_ALPHABET[::-1])}
     else:
         raise TypeError(f'Error: Your string must be either DNA or RNA!') 
