@@ -1,4 +1,4 @@
-from constants import DNA_ALPHABET, RNA_ALPHABET
+from constants import DNA_ALPHABET, RNA_ALPHABET, RNA_CODON_TABLE
 
 
 SIGNS = ('<', '>', '<=', '>=', '=')
@@ -34,4 +34,12 @@ class StringIsNotRNAError(Exception):
         if message is None:
             message = 'Error: Your string is not a valid RNA string!\n\
                 It must be composed using ' + RNA_ALPHABET + ' alphabet!'
+        super().__init__(message)
+
+
+class StringIsNotProteinError(Exception):
+    def __init__(self, message=None):
+        if message is None:
+            message = 'Error: Your string is not a valid protein string!\n\
+                It must be composed using ' + set(RNA_CODON_TABLE.values()) + ' alphabet!'
         super().__init__(message)

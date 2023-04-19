@@ -1,4 +1,4 @@
-from constants import DNA_ALPHABET, RNA_ALPHABET
+from constants import DNA_ALPHABET, RNA_ALPHABET, RNA_CODON_TABLE
 
 def is_DNA(s):
     return all([nt in DNA_ALPHABET for nt in s])
@@ -6,6 +6,10 @@ def is_DNA(s):
 
 def is_RNA(s):
     return all([nt in RNA_ALPHABET for nt in s])
+
+
+def is_protein(s):
+    return all([aa in set(RNA_CODON_TABLE.values()) for aa in s])
 
 
 def complement_table(s):
