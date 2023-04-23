@@ -21,6 +21,7 @@ RNA_CODON_TABLE = {
     'UGG': 'W', 'CGG': 'R', 'AGG': 'R', 'GGG': 'G' 
 }
 
+
 MONOISOTOPIC_MASS_TABLE = {
     'A':    71.03711,
     'C':    103.00919,
